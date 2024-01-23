@@ -40,12 +40,12 @@ userSchema.pre("save", async function (next) {
 });
 
 // match password
-userSchema.method.matchPassword = async function (Password) {
+userSchema.methods.matchPassword = async function (Password) {
   return await bcrypt.compare(Password, this.password);
 };
 
 // SIGN TOKEN
-userSchema.method.getSignedToken = function (res) {
+userSchema.methods.getSignedToken = function (res) {
   const accessToken = JWT.sign(
     { id: this._id },
     process.env.JWT_ACCESS_SECRET,
